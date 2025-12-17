@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "expo": "~54.0.29",
+    "expo-font": "~14.0.10",
+    "expo-splash-screen": "~31.0.12",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-native": "0.81.5"
@@ -25,7 +27,6 @@
     "typescript": "~5.9.2"
   },
   "private": true,
-
   "eslintConfig": {
     "extends": [
       "expo",
@@ -50,7 +51,7 @@
     "trailingComma": "all",
     "singleQuote": true,
     "parser": "typescript",
-    "semi": false,    
+    "semi": false,
     "jsxSingleQuote": true
   }
 }
