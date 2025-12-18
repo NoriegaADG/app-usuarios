@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, } from 'react-native';
-import { Button, Input } from '@core';
+import { Button, Input, NavigationApp } from '@core';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 export default function App() {
+  
 const [loaded, error] = useFonts({
     'PlaypenSans-Bold': require('./assets/fonts/PlaypenSans-Bold.ttf'),
     'PlaypenSans-Light': require('./assets/fonts/PlaypenSans-Light.ttf'),
@@ -22,14 +23,7 @@ const [loaded, error] = useFonts({
     return null;
   }
 
-  return (
-    <View style={styles.container}>
-
-      <Input value='' onChange={console.log} />
-
-      <Button title='Hello' onPress={() => console.log('Hello')}/>
-
-    </View>
+  return ( <NavigationApp />
   );
 }
 
