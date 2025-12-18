@@ -3,6 +3,7 @@ import { Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { LoginScreen, RegisterScreen } from '@containers';
 
 const hideHeader = { headerShown: false }
 
@@ -15,8 +16,8 @@ export function NavigationApp(){
         //Funcion que renderiza stack de autenticacion
         return(
             <Stack.Navigator>
-                <Stack.Screen name='Login' component={()=> <Text>Hola desde el Login</Text>} options= {hideHeader} />
-                <Stack.Screen name='Register' component={ ()=> <Text>Hola desde el Registro</Text> } options= {hideHeader} />
+                <Stack.Screen name='Login' component={LoginScreen} options= {hideHeader} />
+                <Stack.Screen name='Register' component={ RegisterScreen } options= {hideHeader} />
             </Stack.Navigator>
         )
     }
