@@ -36,7 +36,7 @@ export function NavigationApp(){
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='MainApp'>
+            <Stack.Navigator initialRouteName='Authentication'>
                 <Stack.Screen name='Authentication' component={AuthStack} options= {hideHeader}/>
                 <Stack.Screen name='MainApp' component={MainApp} options= {hideHeader} />
             </Stack.Navigator>
