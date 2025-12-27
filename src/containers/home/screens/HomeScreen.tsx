@@ -17,6 +17,7 @@ export const HomeScreen = ({route}: any) => {
 
   const [users, setUsers] = useState<User[]>([])
   const { top } = useSafeAreaInsets()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
   if (!token) return
@@ -28,10 +29,26 @@ export const HomeScreen = ({route}: any) => {
     token,
   })
     .then(response => setUsers(response.responseDB))
-    .catch(error =>
-      Alert.alert('Ha ocurrido un error', error.message)
+    .catch(error => Alert.alert('Ha ocurrido un error', error.message)
     )
 }, [token])
+
+
+function deleteUserById(id: number){
+  setLoading(true)
+
+  makeHttpRequest({
+    host: URL_API_REST,
+    path: '/user/'+id,
+    method: 'DELETE',
+    token,
+  })
+  .then(()=> {
+    const updateUsers = users.filter(user => user.id !== id) 
+    setUsers(updateUsers)})
+  .catch(error => Alert.alert('Ha ocurrido un error', error.message)) 
+  .finally(()=>setLoading(false))
+}
 
   console.log(JSON.stringify(users, null, 2))
 
@@ -49,7 +66,11 @@ export const HomeScreen = ({route}: any) => {
           <Text>{item.name}</Text>
           <Text>{item.email}</Text>
           <TouchableOpacity><Text>Editar</Text></TouchableOpacity>
-          <TouchableOpacity><Text>Eliminar</Text></TouchableOpacity>
+          {loading ? 
+          (<Text>Eliminando ... </Text>)
+          : ( <TouchableOpacity onPress={()=> deleteUserById(item.id )}>
+            <Text style={{color: 'red'}}>Eliminar</Text>
+            </TouchableOpacity>)}
         </View>
       )}
       contentContainerStyle={{gap: 30}}
