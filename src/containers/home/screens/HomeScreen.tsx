@@ -27,7 +27,7 @@ export const HomeScreen = ({route}: any) => {
     method: 'GET',
     token,
   })
-    .then(response => setUsers(response))
+    .then(response => setUsers(response.responseDB))
     .catch(error =>
       Alert.alert('Ha ocurrido un error', error.message)
     )
