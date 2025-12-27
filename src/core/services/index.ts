@@ -13,26 +13,31 @@ export async function makeHttpRequest({
   method = 'GET',
   body,
 }: MakeHttpRequest) {
-  const request = {
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  }
+
+  // 👉 SOLO agregar Authorization si hay token
+  if (token) {
+    headers.Authorization = `Bearer ${token}`
+  }
+
+  const request: RequestInit = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
+    headers,
+  }
+
+  // 👉 SOLO agregar body si NO es GET
+  if (body && method !== 'GET') {
+    request.body = JSON.stringify(body)
   }
 
   return fetch(`${host}${path}`, request)
     .then(async res => {
       if (!res.ok) {
-        const errorStatus = res.status
-        throw new Error(String(errorStatus))
+        throw new Error(String(res.status))
       }
-
       return res.json()
-    })
-    .then(res => res)
-    .catch(err => {
-      throw new Error(`Error: ${err.message}`)
     })
 }
